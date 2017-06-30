@@ -15,44 +15,39 @@
  * PocketFactions v1.0.1 by Luke (TheDiamondYT)
  * All rights reserved.                         
  */
- 
+
 namespace TheDiamondYT\PocketFactions\provider;
 
 use pocketmine\Player;
-use pocketmine\utils\Config;
-use pocketmine\utils\TextFormat as TF;
-
-use TheDiamondYT\PocketFactions\PF;
 use TheDiamondYT\PocketFactions\entity\Faction;
-use TheDiamondYT\PocketFactions\entity\FPlayer;
 
 interface Provider {
 
-    public function save();
-    
-    public function loadFactions();
-    
-    public function loadPlayers();
-    
-    public function getOnlinePlayers();
-    
-    public function getPlayer($player);
-    
-    public function addNewPlayer(Player $player);
-    
-    public function addPlayer(Player $player);
-    
-    public function removePlayer(Player $player);
-    
-    public function getFaction(string $tag);
+	public function save();
 
-    public function createFaction(Faction $faction, array $data, bool $save = false);
-    
-    public function disbandFaction(string $id);
-    
-    public function updateFaction(array $data);
-    
-    public function factionExists(string $faction): bool;
-    
-    public function playerExists($player): bool;
+	public function loadFactions();
+
+	public function loadPlayers();
+
+	public function getOnlinePlayers();
+
+	public function getPlayer($player);
+
+	public function addNewPlayer(Player $player);
+
+	public function addPlayer(Player $player);
+
+	public function removePlayer(Player $player);
+
+	public function getFaction(string $tag);
+
+	public function createFaction(Faction $faction, array $data, bool $save = false);
+
+	public function disbandFaction(string $id);
+
+	public function updateFaction(array $data);
+
+	public function factionExists(string $faction): bool;
+
+	public function playerExists($player): bool;
 }

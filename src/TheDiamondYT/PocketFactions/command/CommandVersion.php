@@ -15,14 +15,12 @@
  * PocketFactions v1.0.1 by Luke (TheDiamondYT)
  * All rights reserved.                         
  */
- 
+
 namespace TheDiamondYT\PocketFactions\command;
 
-use pocketmine\command\CommandSender;
 use pocketmine\utils\TextFormat as TF;
-
-use TheDiamondYT\PocketFactions\PF;
 use TheDiamondYT\PocketFactions\entity\IMember;
+use TheDiamondYT\PocketFactions\PF;
 use TheDiamondYT\PocketFactions\util\TextUtil;
 
 /**
@@ -37,30 +35,30 @@ use TheDiamondYT\PocketFactions\util\TextUtil;
  */
 class CommandVersion extends FCommand {
 
-    public function __construct(PF $plugin) {
-        parent::__construct($plugin, "version", $plugin->translate("commands.version.description"), ["ver", "v"]);
-    }
-    
-    public function getRequirements(): array {
-        return [];
-    }
+	public function __construct(PF $plugin) {
+		parent::__construct($plugin, "version", $plugin->translate("commands.version.description"), ["ver", "v"]);
+	}
 
-    public function perform(IMember $fme, array $args) {
-        $this->msg(TextUtil::titleize($this->plugin->translate("commands.version.header")));
-        $this->msg($this->plugin->translate("commands.version.name", [$this->plugin->getDescription()->getName()]));
-        $this->msg($this->plugin->translate("commands.version.version", [$this->plugin->getDescription()->getVersion()]));
-        $this->msg($this->plugin->translate("commands.version.website", [$this->plugin->getDescription()->getWebsite()]));
-        $this->msg("<h>Author: " . TF::AQUA . "TheDiamondYT");
+	public function getRequirements(): array {
+		return [];
+	}
 
-        if(count($authors = $this->plugin->getDescription()->getAuthors()) > 1) {
-            $list = "";
-            foreach($authors as $author) {
-                if($author !== "TheDiamondYT") {
-                    $list .= "$author ";
-                }
-            }
-            $this->msg("");
-            $this->msg($this->plugin->translate("commands.version.modified", [$list]));
-        }
-    }
+	public function perform(IMember $fme, array $args) {
+		$this->msg(TextUtil::titleize($this->plugin->translate("commands.version.header")));
+		$this->msg($this->plugin->translate("commands.version.name", [$this->plugin->getDescription()->getName()]));
+		$this->msg($this->plugin->translate("commands.version.version", [$this->plugin->getDescription()->getVersion()]));
+		$this->msg($this->plugin->translate("commands.version.website", [$this->plugin->getDescription()->getWebsite()]));
+		$this->msg("<h>Author: " . TF::AQUA . "TheDiamondYT");
+
+		if(count($authors = $this->plugin->getDescription()->getAuthors()) > 1) {
+			$list = "";
+			foreach($authors as $author) {
+				if($author !== "TheDiamondYT") {
+					$list .= "$author ";
+				}
+			}
+			$this->msg("");
+			$this->msg($this->plugin->translate("commands.version.modified", [$list]));
+		}
+	}
 }

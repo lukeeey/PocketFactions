@@ -15,45 +15,44 @@
  * PocketFactions v1.0.1 by Luke (TheDiamondYT)
  * All rights reserved.                         
  */
- 
+
 namespace TheDiamondYT\PocketFactions\listener;
 
-use pocketmine\event\Listener;
-use pocketmine\event\entity\EntityExplodeEvent;
-use pocketmine\event\entity\EntityDamageEvent;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
-
-use TheDiamondYT\PocketFactions\PF;
+use pocketmine\event\entity\EntityDamageEvent;
+use pocketmine\event\entity\EntityExplodeEvent;
+use pocketmine\event\Listener;
 use TheDiamondYT\PocketFactions\Configuration;
+use TheDiamondYT\PocketFactions\PF;
 
 class FEntityListener implements Listener {
 
-    private $plugin;
-    
-    public function __construct(PF $plugin) {
-        $this->plugin = $plugin;
-    }
-    
-    public function onEntityDamage(EntityDamageEvent $event) {
-        if($event instanceof EntityDamageByEntityEvent) {
-            $entity = $event->getEntity();
-            $damager = $event->getDamager();
+	private $plugin;
 
-            if(!$entity instanceof Player or !$damager instanceof Player) {
-                return;
-            }
-                              
-            $fme = $this->plugin->getPlayer($entity);
-            $fhim = $this->plugin->getPlayer($damager); 
-            
-            // Same Faction PvP
-            if($fme->getFaction() === $fhim->getFaction() && Configuration::isSameFactionPvPAllowed()) {             
-                $event->setCancelled(true);
-            }
-        }
-    }
-    
-    public function onEntityExplode(EntityExplodeEvent $event) {
-        
-    }
+	public function __construct(PF $plugin) {
+		$this->plugin = $plugin;
+	}
+
+	public function onEntityDamage(EntityDamageEvent $event) {
+		if($event instanceof EntityDamageByEntityEvent) {
+			$entity = $event->getEntity();
+			$damager = $event->getDamager();
+
+			if(!$entity instanceof Player or !$damager instanceof Player) {
+				return;
+			}
+
+			$fme = $this->plugin->getPlayer($entity);
+			$fhim = $this->plugin->getPlayer($damager);
+
+			// Same Faction PvP
+			if($fme->getFaction() === $fhim->getFaction() && Configuration::isSameFactionPvPAllowed()) {
+				$event->setCancelled(true);
+			}
+		}
+	}
+
+	public function onEntityExplode(EntityExplodeEvent $event) {
+
+	}
 }

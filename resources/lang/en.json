@@ -1,98 +1,98 @@
 {
-    "console": {
-        "data-loaded": "Loaded language and faction data, took %ss (%sms).",
-        "commands-loaded": "Loaded faction commands, took %ss (%sms)."
-    },
-    "player": {
-       "not-found": "<e>That player cannot be found",
-       "no-faction": "<i>You are not in a faction.",
-       "only-leader": "<i>You must be leader to do this.",
-       "already-leader": "<i>That player is already leader.",
-       "has-faction": "<i>You must leave your current faction first.",
-       "not-in-faction": "<i>%s is not a member of your faction."
-    },
-    "faction": {
-        "permanent": "<i>Your faction is permanent and cannot be disbanded.",
-        "tag": {
-            "exists": "<i>That tag is already in use.",
-            "exists-player": "<e>There is a player by that name online.",
-            "too-long": "<i>That tag is too long.",
-            "too-short": "<i>That tag is too short.",
-            "invalid-chars": "<i>That tag contains invalid characters."
-        }
-    },
-    "commands": {
-        "description": "The main command for PocketFactions.",
-        "not-found": "The command '%s' was not found.",
-        "only-player": "<e>You must execute this command in-game",
-        "bypass": {
-            "description": "Toggle admin bypass mode.",
-            "success": "<i>You have <h>%s <i>admin bypass mode.",
-            "fail": "<e>You don't have permission to enable admin bypass mode."
-        },
-        "chat": {
-            "description": "Change your chat mode.",
-            "fail": "<i>Unrecognized chat mode. Please enter 'p', 'f', or 'a'.",
-            "faction-disabled": "<i>Faction chat mode is disabled on this server.",
-            "ally-disabled": "<i>Alliance chat mode is disabled on this server."
-        },
-        "create": {
-            "description": "Create a new faction.",
-            "success": "%s <i>created a new faction %s.",
-            "after": "<i>You should now %s."
-        },
-        "description": {
-            "description": "Change your faction description.",
-            "success": "%s <i>changed the description for %s <i>to: %s."
-        }, 
-        "disband": {
-            "description": "Disband your faction.",
-            "success": "%s <i>disbanded the faction %."
-        },
-        "help": {
-            "description": "Show help for faction commands.",
-            "header": "§2Faction Help (%s/%s)"
-        },
-        "open": {
-            "description": "Change faction joining state",
-            "success": "%s <i>changed the faction to <h>%s"
-        },
-        "leader": {
-            "description": "Promote a player to faction leader.",
-            "success": "%s gave %s the leadership of your faction."
-        },
-        "promote": {
-            "description": "Promote a player to the next faction role.",
-            "highest-role": "%s <i>is already the highest role.",
-            "success": "%s <i>promoted %s <i>to <h>%s."
-        },
-        "reload": {
-            "description": "Reload the config and faction data from disk.",
-            "success": "<i>Reloaded config and faction data, took %ss (%sms)."
-        },
-        "show": {
-            "description": "Display information about a faction.",
-            "header": "%s"
-        },
-        "list": {
-            "description": "List all factions on the server.",
-            "header": "§2Faction List"
-        },
-        "tag": {
-            "description": "Change your faction tag.",
-            "success": "%s <i>changed the tag for %s <i>to: %s."
-        },
-        "title": {
-            "description": "Change a players title.",
-            "success": "%s <i>changed a title: %s."
-        },
-        "version": {
-            "description": "Display the version of PocketFactions you are running.",
-            "header": "§2Plugin Information",
-            "name": "<h>Name: §b%s",
-            "version": "<h>Version: §b%s",
-            "website": "<h>Website: §b%s",
-            "modified": "<i>Modified by %s."
-        }
+  "console": {
+    "data-loaded": "Loaded language and faction data, took %ss (%sms).",
+    "commands-loaded": "Loaded faction commands, took %ss (%sms)."
+  },
+  "player": {
+    "not-found": "<e>That player cannot be found",
+    "no-faction": "<i>You are not in a faction.",
+    "only-leader": "<i>You must be leader to do this.",
+    "already-leader": "<i>That player is already leader.",
+    "has-faction": "<i>You must leave your current faction first.",
+    "not-in-faction": "<i>%s is not a member of your faction."
+  },
+  "faction": {
+    "permanent": "<i>Your faction is permanent and cannot be disbanded.",
+    "tag": {
+      "exists": "<i>That tag is already in use.",
+      "exists-player": "<e>There is a player by that name online.",
+      "too-long": "<i>That tag is too long.",
+      "too-short": "<i>That tag is too short.",
+      "invalid-chars": "<i>That tag contains invalid characters."
     }
+  },
+  "commands": {
+    "plugin-description": "The main command for PocketFactions.",
+    "not-found": "The command '%s' was not found.",
+    "only-player": "<e>You must execute this command in-game",
+    "bypass": {
+      "description": "Toggle admin bypass mode.",
+      "success": "<i>You have <h>%s <i>admin bypass mode.",
+      "fail": "<e>You don't have permission to enable admin bypass mode."
+    },
+    "chat": {
+      "description": "Change your chat mode.",
+      "fail": "<i>Unrecognized chat mode. Please enter 'p', 'f', or 'a'.",
+      "faction-disabled": "<i>Faction chat mode is disabled on this server.",
+      "ally-disabled": "<i>Alliance chat mode is disabled on this server."
+    },
+    "create": {
+      "description": "Create a new faction.",
+      "success": "%s <i>created a new faction %s.",
+      "after": "<i>You should now %s."
+    },
+    "description": {
+      "description": "Change your faction description.",
+      "success": "%s <i>changed the description for %s <i>to: %s."
+    },
+    "disband": {
+      "description": "Disband your faction.",
+      "success": "%s <i>disbanded the faction %."
+    },
+    "help": {
+      "description": "Show help for faction commands.",
+      "header": "§2Faction Help (%s/%s)"
+    },
+    "open": {
+      "description": "Change faction joining state",
+      "success": "%s <i>changed the faction to <h>%s"
+    },
+    "leader": {
+      "description": "Promote a player to faction leader.",
+      "success": "%s gave %s the leadership of your faction."
+    },
+    "promote": {
+      "description": "Promote a player to the next faction role.",
+      "highest-role": "%s <i>is already the highest role.",
+      "success": "%s <i>promoted %s <i>to <h>%s."
+    },
+    "reload": {
+      "description": "Reload the config and faction data from disk.",
+      "success": "<i>Reloaded config and faction data, took %ss (%sms)."
+    },
+    "show": {
+      "description": "Display information about a faction.",
+      "header": "%s"
+    },
+    "list": {
+      "description": "List all factions on the server.",
+      "header": "§2Faction List"
+    },
+    "tag": {
+      "description": "Change your faction tag.",
+      "success": "%s <i>changed the tag for %s <i>to: %s."
+    },
+    "title": {
+      "description": "Change a players title.",
+      "success": "%s <i>changed a title: %s."
+    },
+    "version": {
+      "description": "Display the version of PocketFactions you are running.",
+      "header": "§2Plugin Information",
+      "name": "<h>Name: §b%s",
+      "version": "<h>Version: §b%s",
+      "website": "<h>Website: §b%s",
+      "modified": "<i>Modified by %s."
+    }
+  }
 }

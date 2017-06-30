@@ -15,35 +15,33 @@
  * PocketFactions v1.0.1 by Luke (TheDiamondYT)
  * All rights reserved.                         
  */
- 
+
 namespace TheDiamondYT\PocketFactions\command;
 
-use pocketmine\command\CommandSender;
-
-use TheDiamondYT\PocketFactions\PF;
 use TheDiamondYT\PocketFactions\entity\IMember;
+use TheDiamondYT\PocketFactions\PF;
 
 class CommandReload extends FCommand {
 
-    public function __construct(PF $plugin) {
-        parent::__construct($plugin, "reload", $plugin->translate("commamds.reload.description"));
-    }
-    
-    public function getRequirements(): array {
-        return [
-            "operator"
-        ];
-    }
+	public function __construct(PF $plugin) {
+		parent::__construct($plugin, "reload", $plugin->translate("commands.reload.description"));
+	}
 
-    public function perform(IMember $fme, array $args) {
-        $startTime = microtime(true);
-        $this->plugin->reloadConfig();
-        $this->plugin->getProvider()->loadFactions();
-        $this->plugin->getProvider()->loadPlayers();
-        $this->plugin->getProvider()->save();
-        $this->msg($this->plugin->translate("commands.reload.success", [
-            round(microtime(true) - $startTime, 2), 
-            round(microtime(true) * 1000) - round($startTime * 1000)
-        ]));
-    }
+	public function getRequirements(): array {
+		return [
+			"operator"
+		];
+	}
+
+	public function perform(IMember $fme, array $args) {
+		$startTime = microtime(true);
+		$this->plugin->reloadConfig();
+		$this->plugin->getProvider()->loadFactions();
+		$this->plugin->getProvider()->loadPlayers();
+		$this->plugin->getProvider()->save();
+		$this->msg($this->plugin->translate("commands.reload.success", [
+			round(microtime(true) - $startTime, 2),
+			round(microtime(true) * 1000) - round($startTime * 1000)
+		]));
+	}
 }

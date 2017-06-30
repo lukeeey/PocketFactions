@@ -15,60 +15,63 @@
  * PocketFactions v1.0.1 by Luke (TheDiamondYT)
  * All rights reserved.                         
  */
- 
+
 namespace TheDiamondYT\PocketFactions\struct;
 
 class Role {
-    const UNKNOWN = -1;
-    
-    private static $roles = [];
-    
-    public static function init() {
-        self::addRole(0, "Member");
-        self::addRole(1, "Moderator");
-        self::addRole(2, "Administrator");
-        self::addRole(3, "Leader");
-    }
-    
-    /**
-     * Creates a new faction role.
-     *
-     * @param int
-     * @param string
-     */ 
-    public static function addRole(int $id, string $name) {
-        self::$roles[$id] = $name;
-    }
-    
-    /**
-     * Returns a role from a name.
-     *
-     * @param string
-     * @return int|null
-     */
-    public static function get(string $name) {
-        foreach(self::$roles as $id => $role) {
-            if(strtolower($role) === strtolower($name))
-                return $id;
-        }
-        return null;
-    }
-    
-    /**
-     * Returns true if a role exists.
-     *
-     * @param string|int
-     * @return bool
-     */
-    public static function exists($role): bool {
-        foreach(self::$roles as $id => $role) {
-            if(is_int($role) && $id === $role) {
-                return true;
-            } 
-            elseif(strtolower($role) === strtolower($name)) {
-                return true;
-            }
-        }
-        return false;
-    }
+
+	const UNKNOWN = -1;
+
+	private static $roles = [];
+
+	public static function init() {
+		self::addRole(0, "Member");
+		self::addRole(1, "Moderator");
+		self::addRole(2, "Administrator");
+		self::addRole(3, "Leader");
+	}
+
+	/**
+	 * Creates a new faction role.
+	 *
+	 * @param int
+	 * @param string
+	 */
+	public static function addRole(int $id, string $name) {
+		self::$roles[$id] = $name;
+	}
+
+	/**
+	 * Returns a role from a name.
+	 *
+	 * @param string
+	 *
+	 * @return int|null
+	 */
+	public static function get(string $name) {
+		foreach(self::$roles as $id => $role) {
+			if(strtolower($role) === strtolower($name)) {
+				return $id;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Returns true if a role exists.
+	 *
+	 * @param string|int
+	 *
+	 * @return bool
+	 */
+	public static function exists($role): bool {
+		foreach(self::$roles as $id => $role) {
+			if(is_int($role) && $id === $role) {
+				return true;
+			} elseif(strtolower($role) === strtolower($name)) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

@@ -15,40 +15,35 @@
  * PocketFactions v1.0.1 by Luke (TheDiamondYT)
  * All rights reserved.                         
  */
- 
+
 namespace TheDiamondYT\PocketFactions\command;
 
-use pocketmine\command\CommandSender;
-use pocketmine\Player;
-use pocketmine\utils\TextFormat as TF;
-
-use TheDiamondYT\PocketFactions\PF;
 use TheDiamondYT\PocketFactions\entity\IMember;
+use TheDiamondYT\PocketFactions\PF;
 use TheDiamondYT\PocketFactions\struct\Relation;
-use TheDiamondYT\PocketFactions\util\TextUtil;
 
 class CommandDescription extends FCommand {
 
-    public function __construct(PF $plugin) {
-        parent::__construct($plugin, "desc", $plugin->translate("commands.description.description"));
-        $this->addRequiredArgument("description"); 
-    }
-    
-    public function getRequirements(): array {
-        return [
-            "player", 
-            "faction"
-        ];
-    }
+	public function __construct(PF $plugin) {
+		parent::__construct($plugin, "desc", $plugin->translate("commands.description.description"));
+		$this->addRequiredArgument("description");
+	}
 
-    public function perform(IMember $fme, array $args) {
-        if(empty($args)) {
-            $this->msg($this->getUsage());
-            return;
-        }
-        
-        $faction = $fme->getFaction();
-        $faction->setDescription(implode(" ", $args));
-        //$faction->sendMessage($this->plugin->translate("commands.description.success", [$fme->describeTo($player, true), $fme->describeTo($player->getFaction()), implode(" ", $args)]));
-    }
+	public function getRequirements(): array {
+		return [
+			"player",
+			"faction"
+		];
+	}
+
+	public function perform(IMember $fme, array $args) {
+		if(empty($args)) {
+			$this->msg($this->getUsage());
+			return;
+		}
+
+		$faction = $fme->getFaction();
+		$faction->setDescription(implode(" ", $args));
+		//$faction->sendMessage($this->plugin->translate("commands.description.success", [$fme->describeTo($player, true), $fme->describeTo($player->getFaction()), implode(" ", $args)]));
+	}
 }

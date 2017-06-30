@@ -15,39 +15,36 @@
  * PocketFactions v1.0.1 by Luke (TheDiamondYT)
  * All rights reserved.                         
  */
- 
+
 namespace TheDiamondYT\PocketFactions\command;
 
-use pocketmine\command\CommandSender;
-
-use TheDiamondYT\PocketFactions\PF;
 use TheDiamondYT\PocketFactions\entity\IMember;
-use TheDiamondYT\PocketFactions\util\RoleUtil;
+use TheDiamondYT\PocketFactions\PF;
 
 class CommandOpen extends FCommand {
 
-    public function __construct(PF $plugin) {
-        parent::__construct($plugin, "open", $plugin->translate("commands.open.description"));
-    }
-    
-    public function getRequirements(): array {
-        return [
-            "player",
-            "leader"
-        ];
-    }
+	public function __construct(PF $plugin) {
+		parent::__construct($plugin, "open", $plugin->translate("commands.open.description"));
+	}
 
-    public function perform(IMember $fme, array $args) {        
-        $faction = $fme->getFaction();
-        $open = $faction->isOpen() ? "closed" : "open";
-        
-        $faction->setOpen(!$faction->isOpen());
-        
-        foreach($faction->getOnlinePlayers() as $player) {
-            $player->sendMessage($this->plugin->translate("commands.open.success", [
-                $fme->describeTo($player, true),
-                $open
-            ]));
-        }
-    }
+	public function getRequirements(): array {
+		return [
+			"player",
+			"leader"
+		];
+	}
+
+	public function perform(IMember $fme, array $args) {
+		$faction = $fme->getFaction();
+		$open = $faction->isOpen() ? "closed" : "open";
+
+		$faction->setOpen(!$faction->isOpen());
+
+		foreach($faction->getOnlinePlayers() as $player) {
+			$player->sendMessage($this->plugin->translate("commands.open.success", [
+				$fme->describeTo($player, true),
+				$open
+			]));
+		}
+	}
 }

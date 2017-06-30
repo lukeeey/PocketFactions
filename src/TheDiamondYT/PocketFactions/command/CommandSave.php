@@ -15,29 +15,26 @@
  * PocketFactions v1.0.1 by Luke (TheDiamondYT)
  * All rights reserved.                         
  */
- 
+
 namespace TheDiamondYT\PocketFactions\command;
 
-use pocketmine\command\CommandSender;
-use pocketmine\utils\TextFormat as TF;
-
-use TheDiamondYT\PocketFactions\PF;
 use TheDiamondYT\PocketFactions\entity\IMember;
+use TheDiamondYT\PocketFactions\PF;
 
 class CommandSave extends FCommand {
 
-    public function __construct(PF $plugin) {
-        parent::__construct($plugin, "save", "Save config");
-    }
-    
-    public function getRequirements(): array {
-        return [
-            "operator"
-        ];
-    }
+	public function __construct(PF $plugin) {
+		parent::__construct($plugin, "save", "Save config");
+	}
 
-    public function perform(IMember $fme, array $args) {
-        $this->plugin->getProvider()->save();
-        $this->msg("Saved config"); // TODO: translation
-    }
+	public function getRequirements(): array {
+		return [
+			"operator"
+		];
+	}
+
+	public function perform(IMember $fme, array $args) {
+		$this->plugin->getProvider()->save();
+		$this->msg("Saved config"); // TODO: translation
+	}
 }

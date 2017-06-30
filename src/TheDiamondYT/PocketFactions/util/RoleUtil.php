@@ -15,93 +15,98 @@
  * PocketFactions v1.0.1 by Luke (TheDiamondYT)
  * All rights reserved.                         
  */
- 
+
 namespace TheDiamondYT\PocketFactions\util;
 
 class RoleUtil {
-    const UNKNOWN = -1;
-    
-    private static $roles = [];
-    
-    public static function init() {
-        self::addRole(100, "Member");
-        self::addRole(200, "Moderator");
-        self::addRole(300, "Administrator");
-        self::addRole(400, "Leader");
-    }
-    
-    /**
-     * Creates a new faction role.
-     *
-     * @param int
-     * @param string
-     */ 
-    public static function addRole(int $id, string $name) {
-        self::$roles[$id] = $name;
-    }
-    
-    /**
-     * Returns a role from a name.
-     *
-     * @param string
-     * @return int
-     */
-    public static function get(string $name): int {
-        foreach(self::$roles as $id => $role) {
-            if(strtolower($role) === strtolower($name)) {
-                return $id;
-            }
-        }
-        return self::UNKNOWN;
-    }
 
-    /**
-     * Returns a role name from id.
-     *
-     * @param int $roleId
-     * @return string 
-     */
-    public static function getName(int $roleId): string {
-        foreach(self::$roles as $id => $role) {
-            if($roleId == $id) {
-                return $role;
-            }
-        } 
-        return "Unknown";
-    }
+	const UNKNOWN = -1;
 
-    /**
-     * @param int $roleId
-     * @return int
-     */
-    public static function getNext(int $roleId): int {
-        foreach(self::$roles as $id => $role) {
-            // TODO
-        }
-        return $roleId;
-    }
+	private static $roles = [];
 
-    /**
-     * Returns the highest registered role.
-     *
-     * @return int
-     */
-    public static function getHighestRole(): int {
-        return max(array_keys($this->roles));
-    }
-    
-    /**
-     * Returns true if a role exists.
-     *
-     * @param int
-     * @return bool
-     */
-    public static function exists($roleId): bool {
-        foreach(self::$roles as $id => $role) {
-            if($roleId === $role) {
-                return true;
-            } 
-        }
-        return false;
-    }
+	public static function init() {
+		self::addRole(100, "Member");
+		self::addRole(200, "Moderator");
+		self::addRole(300, "Administrator");
+		self::addRole(400, "Leader");
+	}
+
+	/**
+	 * Creates a new faction role.
+	 *
+	 * @param int
+	 * @param string
+	 */
+	public static function addRole(int $id, string $name) {
+		self::$roles[$id] = $name;
+	}
+
+	/**
+	 * Returns a role from a name.
+	 *
+	 * @param string
+	 *
+	 * @return int
+	 */
+	public static function get(string $name): int {
+		foreach(self::$roles as $id => $role) {
+			if(strtolower($role) === strtolower($name)) {
+				return $id;
+			}
+		}
+		return self::UNKNOWN;
+	}
+
+	/**
+	 * Returns a role name from id.
+	 *
+	 * @param int $roleId
+	 *
+	 * @return string
+	 */
+	public static function getName(int $roleId): string {
+		foreach(self::$roles as $id => $role) {
+			if($roleId == $id) {
+				return $role;
+			}
+		}
+		return "Unknown";
+	}
+
+	/**
+	 * @param int $roleId
+	 *
+	 * @return int
+	 */
+	public static function getNext(int $roleId): int {
+		foreach(self::$roles as $id => $role) {
+			// TODO
+		}
+		return $roleId;
+	}
+
+	/**
+	 * Returns the highest registered role.
+	 *
+	 * @return int
+	 */
+	public static function getHighestRole(): int {
+		return max(array_keys($this->roles));
+	}
+
+	/**
+	 * Returns true if a role exists.
+	 *
+	 * @param int
+	 *
+	 * @return bool
+	 */
+	public static function exists($roleId): bool {
+		foreach(self::$roles as $id => $role) {
+			if($roleId === $role) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

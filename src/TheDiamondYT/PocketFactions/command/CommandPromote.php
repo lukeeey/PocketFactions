@@ -15,55 +15,53 @@
  * PocketFactions v1.0.1 by Luke (TheDiamondYT)
  * All rights reserved.                         
  */
- 
+
 namespace TheDiamondYT\PocketFactions\command;
 
-use pocketmine\command\CommandSender;
-
-use TheDiamondYT\PocketFactions\PF;
 use TheDiamondYT\PocketFactions\entity\IMember;
+use TheDiamondYT\PocketFactions\PF;
 use TheDiamondYT\PocketFactions\util\RoleUtil;
 
 class CommandPromote extends FCommand {
 
-    public function __construct(PF $plugin) {
-        parent::__construct($plugin, "promote", $plugin->translate("commands.promote.description"));
-        $this->addRequiredArgument("player");
-    }
-    
-    public function getRequirements(): array {
-        return [
-            "player",
-            "leader"
-        ];
-    }
+	public function __construct(PF $plugin) {
+		parent::__construct($plugin, "promote", $plugin->translate("commands.promote.description"));
+		$this->addRequiredArgument("player");
+	}
 
-    public function perform(IMember $fme, array $args) {     
-        $target = $this->plugin->getPlayer($this->plugin->getServer()->getPlayer($args[0]));
-        
-        if($target === null) {
-            $this->msg($this->plugin->translate("player.not-found"));
-            return;
-        }
-        if($target->getFaction() !== $fme->getFaction()) {
-            $this->msg($this->plugin->translate("player.not-in-faction"));
-            return;
-        }
-        if($target->getRole() === ($highest = RoleUtil::getHighestRole()) && $highest !== RoleUtil::get("Leader")) {
-            $this->msg($this->plugin->translate("commands.promote.highest-role", [$target->getName()]));
-            return;
-        }
+	public function getRequirements(): array {
+		return [
+			"player",
+			"leader"
+		];
+	}
 
-        $role = RoleUtil::getNext($target->getRole());
-                
-        $fme->setRole($role);
-        
-        foreach($fme->getFaction()->getOnlinePlayers() as $player) {
-            $player->sendMessage($this->plugin->translate("commands.promote.success", [
-                $fme->describeTo($player, true),
-                $target->describeTo($player),
-                Role::getName($role)
-            ])); 
-        }
-    }
+	public function perform(IMember $fme, array $args) {
+		$target = $this->plugin->getPlayer($this->plugin->getServer()->getPlayer($args[0]));
+
+		if($target === null) {
+			$this->msg($this->plugin->translate("player.not-found"));
+			return;
+		}
+		if($target->getFaction() !== $fme->getFaction()) {
+			$this->msg($this->plugin->translate("player.not-in-faction"));
+			return;
+		}
+		if($target->getRole() === ($highest = RoleUtil::getHighestRole()) && $highest !== RoleUtil::get("Leader")) {
+			$this->msg($this->plugin->translate("commands.promote.highest-role", [$target->getName()]));
+			return;
+		}
+
+		$role = RoleUtil::getNext($target->getRole());
+
+		$fme->setRole($role);
+
+		foreach($fme->getFaction()->getOnlinePlayers() as $player) {
+			$player->sendMessage($this->plugin->translate("commands.promote.success", [
+				$fme->describeTo($player, true),
+				$target->describeTo($player),
+				Role::getName($role)
+			]));
+		}
+	}
 }

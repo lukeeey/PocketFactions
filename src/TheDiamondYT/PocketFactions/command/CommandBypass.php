@@ -15,36 +15,31 @@
  * PocketFactions v1.0.1 by Luke (TheDiamondYT)
  * All rights reserved.                         
  */
- 
+
 namespace TheDiamondYT\PocketFactions\command;
 
-use pocketmine\command\CommandSender;
-use pocketmine\Player;
-use pocketmine\utils\TextFormat as TF;
-
-use TheDiamondYT\PocketFactions\PF;
-use TheDiamondYT\PocketFactions\Faction;
 use TheDiamondYT\PocketFactions\entity\IMember;
+use TheDiamondYT\PocketFactions\Faction;
+use TheDiamondYT\PocketFactions\PF;
 use TheDiamondYT\PocketFactions\struct\Relation;
-use TheDiamondYT\PocketFactions\util\RoleUtil;
 
 class CommandBypass extends FCommand {
 
-    public function __construct(PF $plugin) {
-        parent::__construct($plugin, "bypass", $plugin->translate("commands.bypass.description"));
-    }
-    
-    public function getRequirements(): array {
-        return [
-            "player",
-            "operator"
-        ];
-    }
+	public function __construct(PF $plugin) {
+		parent::__construct($plugin, "bypass", $plugin->translate("commands.bypass.description"));
+	}
 
-    public function perform(IMember $fme, array $args) {
-        $bypassing = $fme->isAdminBypassing() ? "disabled" : "enabled";
+	public function getRequirements(): array {
+		return [
+			"player",
+			"operator"
+		];
+	}
 
-        $fme->setAdminBypassing(!$fme->isAdminBypassing());
-        $this->msg($this->plugin->translate("commands.bypass.success", [$bypassing]));
-    }
+	public function perform(IMember $fme, array $args) {
+		$bypassing = $fme->isAdminBypassing() ? "disabled" : "enabled";
+
+		$fme->setAdminBypassing(!$fme->isAdminBypassing());
+		$this->msg($this->plugin->translate("commands.bypass.success", [$bypassing]));
+	}
 }

@@ -15,53 +15,51 @@
  * PocketFactions v1.0.1 by Luke (TheDiamondYT)
  * All rights reserved.                         
  */
- 
+
 namespace TheDiamondYT\PocketFactions\command;
 
-use pocketmine\command\CommandSender;
-
-use TheDiamondYT\PocketFactions\PF;
 use TheDiamondYT\PocketFactions\entity\IMember;
+use TheDiamondYT\PocketFactions\PF;
 use TheDiamondYT\PocketFactions\struct\Relation;
 
 class CommandTag extends FCommand {
 
-    public function __construct(PF $plugin) {
-        parent::__construct($plugin, "tag", $plugin->translate("commands.tag.description"));
-        $this->addRequiredArgument("tag");
-    }
-    
-    public function getRequirements(): array {
-        return [
-            "player",
-            "faction",
-            "leader"
-        ];
-    }
+	public function __construct(PF $plugin) {
+		parent::__construct($plugin, "tag", $plugin->translate("commands.tag.description"));
+		$this->addRequiredArgument("tag");
+	}
 
-    public function perform(IMember $fme, array $args) {
-        if(empty($args)) {
-            $this->msg($sender, $this->getUsage());
-            return;
-        }
-        if(strlen($args[0]) > $this->cfg["faction"]["maxTagLength"]) {
-            $this->msg($sender, $this->plugin->translate("faction.tag.too-long"));
-            return;
-        }
-        if(strlen($args[0]) < $this->cfg["faction"]["minTagLength"]) {
-            $this->msg($sender, $this->plugin->translate("faction.tag.too-short"));
-            return;
-        }
-        
-        $fme->getFaction()->setTag($args[0]);
-        
-        foreach($this->plugin->getProvider()->getOnlinePlayers() as $player) {
-            $player->sendMessage($this->plugin->translate("commands.tag.success", [
-                $fme->describeTo($player, true),
-                $fme->describeTo($player->getFaction()),
-                $args[0]
-            ]));
-        }
-    }
+	public function getRequirements(): array {
+		return [
+			"player",
+			"faction",
+			"leader"
+		];
+	}
+
+	public function perform(IMember $fme, array $args) {
+		if(empty($args)) {
+			$this->msg($sender, $this->getUsage());
+			return;
+		}
+		if(strlen($args[0]) > $this->cfg["faction"]["maxTagLength"]) {
+			$this->msg($sender, $this->plugin->translate("faction.tag.too-long"));
+			return;
+		}
+		if(strlen($args[0]) < $this->cfg["faction"]["minTagLength"]) {
+			$this->msg($sender, $this->plugin->translate("faction.tag.too-short"));
+			return;
+		}
+
+		$fme->getFaction()->setTag($args[0]);
+
+		foreach($this->plugin->getProvider()->getOnlinePlayers() as $player) {
+			$player->sendMessage($this->plugin->translate("commands.tag.success", [
+				$fme->describeTo($player, true),
+				$fme->describeTo($player->getFaction()),
+				$args[0]
+			]));
+		}
+	}
 }
 

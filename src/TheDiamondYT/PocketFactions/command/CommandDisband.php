@@ -15,64 +15,63 @@
  * PocketFactions v1.0.1 by Luke (TheDiamondYT)
  * All rights reserved.                         
  */
- 
+
 namespace TheDiamondYT\PocketFactions\command;
 
-use pocketmine\command\CommandSender;
 use pocketmine\utils\TextFormat as TF;
-
-use TheDiamondYT\PocketFactions\PF;
 use TheDiamondYT\PocketFactions\entity\IMember;
+use TheDiamondYT\PocketFactions\PF;
 use TheDiamondYT\PocketFactions\struct\Relation;
-use TheDiamondYT\PocketFactions\util\TextUtil;
 
 class CommandDisband extends FCommand {
 
-    public function __construct(PF $plugin) {
-        parent::__construct($plugin, "disband", $plugin->translate("commands.disband.description"));
-    }
-    
-    public function getRequirements(): array {
-        return [
-            "player" // dont include faction requirement, as it only applies to admin bypass mode
-        ];
-    }
+	public function __construct(PF $plugin) {
+		parent::__construct($plugin, "disband", $plugin->translate("commands.disband.description"));
+	}
 
-    public function perform(IMember $fme, array $args) {
-        if(!$fme->hasFaction() && !$fme->isAdminBypassing()) {
-            $this->msg($this->plugin->translate("player.no-faction"));
-            return;
-        }
-        if(!$fme->isLeader() && !$fme->isAdminBypassing()) {
-            $this->msg($this->plugin->translate("player.only-leader"));
-            return;
-        }
-        if($fme->getFaction()->isPermanent()) {
-            $this->msg($this->plugin->translate("faction.permanent"));
-            return;
-        }
-        
-        $faction = $fme->getFaction();
-        
-        if(!empty($args)) {
-            if($fme->isAdminBypassing()) {
-                $faction = $this->plugin->getFaction($args[0]);
-                if($faction === null)
-                    $faction = $fme->getFaction();
-            }
-        }
-        
-        foreach($faction->getPlayers() as $player) {
-            $player->setFaction($this->plugin->getFaction("Wilderness"));
-        }
-        
-        $faction->disband();
+	public function getRequirements(): array {
+		return [
+			"player" // dont include faction requirement, as it only applies to admin bypass mode
+		];
+	}
 
-        foreach($this->plugin->getProvider()->getOnlinePlayers() as $player) {
-            $player->sendMessage($this->plugin->translate("commands.disband.success", [$fme->describeTo($player), $fme->getColorTo($player) . $faction->getTag()]));
-        }
-        
-        if($this->cfg["faction"]["logFactionDisband"] === true) 
-            PF::log(TF::GRAY . $sender->getName() . " disbanded the faction " . $faction->getName());
-    }
+	public function perform(IMember $fme, array $args) {
+		if(!$fme->hasFaction() && !$fme->isAdminBypassing()) {
+			$this->msg($this->plugin->translate("player.no-faction"));
+			return;
+		}
+		if(!$fme->isLeader() && !$fme->isAdminBypassing()) {
+			$this->msg($this->plugin->translate("player.only-leader"));
+			return;
+		}
+		if($fme->getFaction()->isPermanent()) {
+			$this->msg($this->plugin->translate("faction.permanent"));
+			return;
+		}
+
+		$faction = $fme->getFaction();
+
+		if(!empty($args)) {
+			if($fme->isAdminBypassing()) {
+				$faction = $this->plugin->getFaction($args[0]);
+				if($faction === null) {
+					$faction = $fme->getFaction();
+				}
+			}
+		}
+
+		foreach($faction->getPlayers() as $player) {
+			$player->setFaction($this->plugin->getFaction("Wilderness"));
+		}
+
+		$faction->disband();
+
+		foreach($this->plugin->getProvider()->getOnlinePlayers() as $player) {
+			$player->sendMessage($this->plugin->translate("commands.disband.success", [$fme->describeTo($player), $fme->getColorTo($player) . $faction->getTag()]));
+		}
+
+		if($this->cfg["faction"]["logFactionDisband"] === true) {
+			PF::log(TF::GRAY . $sender->getName() . " disbanded the faction " . $faction->getName());
+		}
+	}
 }

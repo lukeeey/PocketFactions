@@ -15,66 +15,61 @@
  * PocketFactions v1.0.1 by Luke (TheDiamondYT)
  * All rights reserved.                         
  */
- 
+
 namespace TheDiamondYT\PocketFactions\command;
 
-use pocketmine\command\CommandSender;
-use pocketmine\Player;
-use pocketmine\utils\TextFormat as TF;
-
-use TheDiamondYT\PocketFactions\PF;
+use TheDiamondYT\PocketFactions\Configuration;
 use TheDiamondYT\PocketFactions\entity\IMember;
+use TheDiamondYT\PocketFactions\PF;
 use TheDiamondYT\PocketFactions\struct\ChatMode;
 use TheDiamondYT\PocketFactions\struct\Relation;
-use TheDiamondYT\PocketFactions\Configuration;
-use TheDiamondYT\PocketFactions\util\RoleUtil;
 
 class CommandChat extends FCommand {
 
-    public function __construct(PF $plugin) {
-        parent::__construct($plugin, "chat", $plugin->translate("commands.chat.description"), ["c"]);
-        $this->addRequiredArgument("mode"); 
-    }
-    
-    public function getRequirements(): array {
-        return [
-            "player"
-        ];
-    }
+	public function __construct(PF $plugin) {
+		parent::__construct($plugin, "chat", $plugin->translate("commands.chat.description"), ["c"]);
+		$this->addRequiredArgument("mode");
+	}
 
-    public function perform(IMember $fme, array $args) {
-        if(empty($args)) {
-            $this->msg($this->getUsage());
-            return;
-        }
-        
-        switch($args[0]) {
-            case "p":
-            case "public":
-                $fme->setChatMode(ChatMode::PUBLIC);
-                $this->msg("Public chat mode.");
-                break;
-            case "f":
-            case "faction":
-                if(!Configuration::isFactionChatEnabled()) {
-                    $this->msg($this->plugin->translate("commands.chat.faction-disabled"));
-                    return;
-                }
-                $fme->setChatMode(ChatMode::FACTION);
-                $this->msg("Faction only chat mode.");
-                break;
-            case "a":
-            case "ally":
-                if(!Configuration::isAllyChatEnabled()) {
-                    $this->msg($this->plugin->translate("commands.chat.ally-disabled"));
-                    return;
-                }
-                $fme->setChatMode(ChatMode::ALLY);
-                $this->msg("Alliance only chat mode.");
-                break;
-            default:
-                $this->msg($this->plugin->translate("commands.chat.fail"));
-                return;
-        }
-    }
+	public function getRequirements(): array {
+		return [
+			"player"
+		];
+	}
+
+	public function perform(IMember $fme, array $args) {
+		if(empty($args)) {
+			$this->msg($this->getUsage());
+			return;
+		}
+
+		switch($args[0]) {
+			case "p":
+			case "public":
+				$fme->setChatMode(ChatMode::PUBLIC);
+				$this->msg("Public chat mode.");
+				break;
+			case "f":
+			case "faction":
+				if(!Configuration::isFactionChatEnabled()) {
+					$this->msg($this->plugin->translate("commands.chat.faction-disabled"));
+					return;
+				}
+				$fme->setChatMode(ChatMode::FACTION);
+				$this->msg("Faction only chat mode.");
+				break;
+			case "a":
+			case "ally":
+				if(!Configuration::isAllyChatEnabled()) {
+					$this->msg($this->plugin->translate("commands.chat.ally-disabled"));
+					return;
+				}
+				$fme->setChatMode(ChatMode::ALLY);
+				$this->msg("Alliance only chat mode.");
+				break;
+			default:
+				$this->msg($this->plugin->translate("commands.chat.fail"));
+				return;
+		}
+	}
 }

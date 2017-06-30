@@ -15,70 +15,67 @@
  * PocketFactions v1.0.1 by Luke (TheDiamondYT)
  * All rights reserved.                         
  */
- 
+
 namespace TheDiamondYT\PocketFactions\command;
 
-use pocketmine\command\CommandSender;
 use pocketmine\utils\TextFormat as TF;
-
-use TheDiamondYT\PocketFactions\PF;
 use TheDiamondYT\PocketFactions\entity\IMember;
+use TheDiamondYT\PocketFactions\PF;
 use TheDiamondYT\PocketFactions\struct\Relation;
 use TheDiamondYT\PocketFactions\util\TextUtil;
 
 class CommandList extends FCommand {
 
-    public function __construct(PF $plugin) {
-        parent::__construct($plugin, "list", $plugin->translate("commands.list.description"));
-        $this->addOptionalArgument("factionless");
-    }
-    
-    public function getRequirements(): array {
-        return [];
-    }
+	public function __construct(PF $plugin) {
+		parent::__construct($plugin, "list", $plugin->translate("commands.list.description"));
+		$this->addOptionalArgument("factionless");
+	}
 
-    public function perform(IMember $fme, array $args) {
-        $faction = $fme->getFaction();
-        $factionless = [];
-        $factions = [];
-        
-        $this->msg(TextUtil::titleize($this->plugin->translate("commands.list.header")));
-        
-        // Factionless players
-        foreach($this->plugin->getProvider()->getOnlinePlayers() as $player) {
-            if(!$player->hasFaction()) {
-                $factionless[$player->getName()] = $player->getName();
-            }
-        }
-        
-        if(!empty($args) && !is_numeric($args[0])) {
-            if(strtolower($args[0]) === "factionless") {
-                $this->msg(TF::GOLD . "Factionless: " . count($factionless) . " online");
-                $this->msg(TF::YELLOW . implode(", ", $factionless));
-                return;
-            }
-        }
-        
-        // All factions
-        foreach($this->plugin->getProvider()->getFactions() as $faction) {
-            $factions[] = $faction;
-        }
-        
-        if(count($args) === 0) {
-            $page = 1;
-        }
-        elseif(is_numeric($args[1])) {
-            $page = (int) $args[1];
-        }
-        
-        ksort($factions, SORT_NATURAL | SORT_FLAG_CASE);    
-        
-        $factions = array_chunk($factions, 5);
-        
-        $this->msg(TF::GOLD . "Factionless: " . count($factionless) . " online");   
-        
-        foreach($factions[$page - 1] as $faction) {
-            $this->msg(TF::GOLD . "{$faction->getTag()} " . TF::YELLOW . count($faction->getOnlinePlayers()));
-        }   
-    }
+	public function getRequirements(): array {
+		return [];
+	}
+
+	public function perform(IMember $fme, array $args) {
+		$faction = $fme->getFaction();
+		$factionless = [];
+		$factions = [];
+
+		$this->msg(TextUtil::titleize($this->plugin->translate("commands.list.header")));
+
+		// Factionless players
+		foreach($this->plugin->getProvider()->getOnlinePlayers() as $player) {
+			if(!$player->hasFaction()) {
+				$factionless[$player->getName()] = $player->getName();
+			}
+		}
+
+		if(!empty($args) && !is_numeric($args[0])) {
+			if(strtolower($args[0]) === "factionless") {
+				$this->msg(TF::GOLD . "Factionless: " . count($factionless) . " online");
+				$this->msg(TF::YELLOW . implode(", ", $factionless));
+				return;
+			}
+		}
+
+		// All factions
+		foreach($this->plugin->getProvider()->getFactions() as $faction) {
+			$factions[] = $faction;
+		}
+
+		if(count($args) === 0) {
+			$page = 1;
+		} elseif(is_numeric($args[1])) {
+			$page = (int) $args[1];
+		}
+
+		ksort($factions, SORT_NATURAL | SORT_FLAG_CASE);
+
+		$factions = array_chunk($factions, 5);
+
+		$this->msg(TF::GOLD . "Factionless: " . count($factionless) . " online");
+
+		foreach($factions[$page - 1] as $faction) {
+			$this->msg(TF::GOLD . "{$faction->getTag()} " . TF::YELLOW . count($faction->getOnlinePlayers()));
+		}
+	}
 }

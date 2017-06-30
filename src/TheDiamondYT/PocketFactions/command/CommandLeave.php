@@ -15,34 +15,30 @@
  * PocketFactions v1.0.1 by Luke (TheDiamondYT)
  * All rights reserved.                         
  */
- 
+
 namespace TheDiamondYT\PocketFactions\command;
 
-use pocketmine\command\CommandSender;
-use pocketmine\Player;
-use pocketmine\utils\TextFormat as TF;
-
-use TheDiamondYT\PocketFactions\PF;
 use TheDiamondYT\PocketFactions\entity\IMember;
+use TheDiamondYT\PocketFactions\PF;
 
 class CommandLeave extends FCommand {
 
-    public function __construct(PF $plugin) {
-        parent::__construct($plugin, "leave", $plugin->translate("commands.leave.description"));
-    }
-    
-    public function getRequirements(): array {
-        return [
-            "player",
-            "faction"
-        ];
-    }
+	public function __construct(PF $plugin) {
+		parent::__construct($plugin, "leave", $plugin->translate("commands.leave.description"));
+	}
 
-    public function perform(IMember $fme, array $args) {
-        /*if(!$fme->getFaction()->isPermanent() && $fme->isLeader()) {
-            $this->msg($sender, $this->plugin->translate("player.give-leader"));
-            return;
-        }*/
-        $fme->leaveFaction();
-    }
+	public function getRequirements(): array {
+		return [
+			"player",
+			"faction"
+		];
+	}
+
+	public function perform(IMember $fme, array $args) {
+		/*if(!$fme->getFaction()->isPermanent() && $fme->isLeader()) {
+			$this->msg($sender, $this->plugin->translate("player.give-leader"));
+			return;
+		}*/
+		$fme->leaveFaction();
+	}
 }

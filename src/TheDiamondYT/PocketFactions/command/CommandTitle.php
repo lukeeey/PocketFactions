@@ -15,41 +15,37 @@
  * PocketFactions v1.0.1 by Luke (TheDiamondYT)
  * All rights reserved.                         
  */
- 
+
 namespace TheDiamondYT\PocketFactions\command;
 
-use pocketmine\command\CommandSender;
-use pocketmine\Player;
-use pocketmine\utils\TextFormat as TF;
-
-use TheDiamondYT\PocketFactions\PF;
 use TheDiamondYT\PocketFactions\entity\IMember;
+use TheDiamondYT\PocketFactions\PF;
 use TheDiamondYT\PocketFactions\struct\Relation;
 
 class CommandTitle extends FCommand {
 
-    public function __construct(PF $plugin) {
-        parent::__construct($plugin, "title", "Change a players title");
-        $this->addRequiredArgument("title"); 
-    }
-    
-    public function getRequirements(): array {
-        return [
-            "player",
-            "faction"
-        ];
-    }
+	public function __construct(PF $plugin) {
+		parent::__construct($plugin, "title", "Change a players title");
+		$this->addRequiredArgument("title");
+	}
 
-    public function perform(IMember $fme, array $args) {
-        if(empty($args)) {
-            $this->msg($this->getUsage());
-            return;
-        }
-        
-        $fme->setTitle(implode(" ", array_slice($args)));
-        $fme->getFaction()->sendMessage($this->plugin->translate("commands.title.success", [
-            $fme->describeTo($player),
-            $fme->describeTo($player)
-        ]));
-    }
+	public function getRequirements(): array {
+		return [
+			"player",
+			"faction"
+		];
+	}
+
+	public function perform(IMember $fme, array $args) {
+		if(empty($args)) {
+			$this->msg($this->getUsage());
+			return;
+		}
+
+		$fme->setTitle(implode(" ", array_slice($args)));
+		$fme->getFaction()->sendMessage($this->plugin->translate("commands.title.success", [
+			$fme->describeTo($player),
+			$fme->describeTo($player)
+		]));
+	}
 }
