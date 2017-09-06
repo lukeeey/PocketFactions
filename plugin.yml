@@ -1,5 +1,5 @@
 name: PocketFactions
 version: 0.0.1
 author: TheDiamondYT
-api: [3.0.0-ALPHA4, 3.0.0-ALPHA5, 3.0.0-ALPHA6]
+api: [3.0.0-ALPHA4, 3.0.0-ALPHA5, 3.0.0-ALPHA6, 3.0.0-ALPHA7]
 main: TheDiamondYT\PocketFactions\Loader
